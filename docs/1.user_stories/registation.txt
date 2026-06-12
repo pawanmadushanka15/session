@@ -1,0 +1,27 @@
+Act as a Senior Business Analyst.
+
+I am developing a Library Management System.
+
+Generate a user story for Student Registration using the following format:
+
+1. Title
+2. User Story (As a..., I want..., So that...)
+3. Acceptance Criteria (Given/When/Then format)
+4. Business Rules
+5. Validation Rules
+6. Priority (High/Medium/Low)
+
+The system should allow students to:
+
+* Register with Full Name
+* Email Address
+* Student ID
+* Password
+
+Include validations such as:
+
+* Email must be unique
+* Password must contain at least 8 characters
+* Required fields cannot be empty
+
+Provide the output in a professional Agile user story format.

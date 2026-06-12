@@ -1,0 +1,44 @@
+Act as a Senior Solution Architect.
+
+Based on the following user story, create a complete system design.
+
+User Story
+
+Title: Student Registration
+
+As a student,
+
+I want to register for the Library Management System
+
+So that I can borrow books and manage my library activities.
+
+Acceptance Criteria:
+
+* Student can enter full name.
+* Student can enter email address.
+* Student can enter student ID.
+* Email must be unique.
+* Password must contain at least 8 characters.
+* Registration confirmation message should appear.
+
+Technology Stack:
+
+* Frontend: NextJS
+* Backend: NextJS
+* Database: Supabase
+* Deployment: AWS
+
+Generate:
+
+1. High-Level Architecture Diagram
+2. Component Diagram
+3. Registration Process Flow
+4. Database Schema for Student Registration
+5. API Endpoint Design
+6. Request and Response JSON Examples
+7. Authentication Design
+8. Validation Rules
+9. Security Considerations
+10. AWS Deployment Architecture
+
+Provide architecture diagrams and flow diagrams in text format suitable for a technical design document.

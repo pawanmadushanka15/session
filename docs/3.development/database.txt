@@ -1,0 +1,42 @@
+Act as a Senior Database Architect.
+
+Based on the following user story, design the database schema.
+
+User Story:
+As a student,
+I want to register for the Library Management System,
+So that I can borrow books and manage my library activities.
+
+Requirements:
+
+* Full Name
+* Email Address
+* Student ID
+* Password
+* Email must be unique
+* Password must contain at least 8 characters
+
+Generate:
+
+1. Database Tables
+2. Column Definitions
+3. Data Types
+4. Primary Keys
+5. Unique Constraints
+6. Indexes
+7. SQL CREATE TABLE Statements
+8. Entity Relationship Diagram (Text Format)
+9. Database Design Justification
+
+Database: Supabase (PostgreSQL direct connection)
+
+Connection env vars (same as Gluck backend):
+- PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE
+
+---
+
+Implementation (see project root):
+- Migration: supabase/migrations/001_create_students.sql (run via `npm run db:migrate`)
+- DB client: src/lib/db.ts (pg Pool)
+- Table: library_students (id, full_name, email, student_id, password_hash, created_at, updated_at)
+- Unique constraints on email and student_id

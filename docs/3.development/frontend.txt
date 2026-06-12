@@ -1,0 +1,46 @@
+Act as a Senior Frontend Developer.
+
+Based on the following user story, implement the frontend for student registration.
+
+User Story:
+As a student,
+I want to register for the Library Management System,
+So that I can borrow books and manage my library activities.
+
+Requirements:
+
+* Full Name
+* Email Address
+* Student ID
+* Password
+* Email must be unique
+* Password must contain at least 8 characters
+
+Technology Stack:
+
+* NextJS
+* Material UI
+* Axios
+
+Generate:
+
+1. UI Wireframe
+2. React Component Structure
+3. Registration Form UI
+4. Form Validation Rules
+5. API Integration
+6. Loading States
+7. Error Handling
+8. Success Message Flow
+9. Folder Structure
+10. Complete React Component Code
+
+Follow modern React best practices and responsive design principles.
+
+---
+
+Implementation (see project root):
+- Page: src/app/register/page.tsx
+- Component: src/components/registration/RegistrationForm.tsx
+- API client: src/lib/api.ts (Axios)
+- Theme: src/components/providers/ThemeRegistry.tsx

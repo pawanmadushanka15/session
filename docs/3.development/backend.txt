@@ -1,0 +1,49 @@
+Act as a Senior NextJS Developer.
+
+Based on the following user story, implement the backend for student registration.
+
+User Story:
+As a student,
+I want to register for the Library Management System,
+So that I can borrow books and manage my library activities.
+
+Requirements:
+
+* Full Name
+* Email Address
+* Student ID
+* Password
+* Email must be unique
+* Password must contain at least 8 characters
+
+Technology Stack:
+
+* NextJS
+* Supabase
+* REST API
+
+Generate:
+
+1. Database Migration
+2. Student Model
+3. Form Request Validation
+4. Controller
+5. Service Layer
+6. API Routes
+7. Registration API Endpoint
+8. Request JSON Example
+9. Response JSON Example
+10. Error Handling
+11. Unit Tests
+
+Follow NextJS best practices and clean architecture principles.
+
+---
+
+Implementation (see project root):
+- API Route: src/app/api/auth/register/route.ts
+- Service: src/services/student.service.ts
+- Validation: src/lib/validations/registration.ts
+- Types: src/types/student.ts
+- Tests: src/__tests__/registration.validation.test.ts
+- Endpoint: POST /api/auth/register

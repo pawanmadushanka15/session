@@ -1,0 +1,40 @@
+Act as a Senior QA Engineer.
+
+Based on the following user story, generate comprehensive test cases.
+
+User Story
+
+Title: Student Registration
+
+As a student,
+
+I want to register for the Library Management System
+
+So that I can borrow books and manage my library activities.
+
+Acceptance Criteria:
+
+* Student can enter full name.
+* Student can enter email address.
+* Student can enter student ID.
+* Email must be unique.
+* Password must contain at least 8 characters.
+* Registration confirmation message should appear.
+
+Generate:
+
+1. Positive Test Cases
+2. Negative Test Cases
+3. Boundary Value Test Cases
+4. Validation Test Cases
+5. API Test Cases
+6. Security Test Cases
+7. UI Test Cases
+8. Test Data
+9. Expected Results
+
+Provide the output in the following format:
+
+| Test Case ID | Test Scenario | Preconditions | Test Steps | Test Data | Expected Result | Priority |
+
+Include both manual and automation-ready test cases.
