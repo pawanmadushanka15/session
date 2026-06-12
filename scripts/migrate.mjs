@@ -26,7 +26,8 @@ try {
   await pool.query(sql);
   console.log("Migration completed: library_students table is ready.");
 } catch (error) {
-  console.error("Migration failed:", error.message);
+  console.error("Migration failed:");
+  console.error(error);
   process.exit(1);
 } finally {
   await pool.end();
