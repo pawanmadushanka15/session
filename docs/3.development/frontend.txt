@@ -1,13 +1,15 @@
 Act as a Senior Frontend Developer.
 
-Based on the following user story, implement the frontend for student registration.
+Based on the following user stories, implement the frontend for student registration and student login.
 
-User Story:
+User Story 1:
+Title: Student Registration
+
 As a student,
 I want to register for the Library Management System,
 So that I can borrow books and manage my library activities.
 
-Requirements:
+Registration Requirements:
 
 * Full Name
 * Email Address
@@ -15,6 +17,23 @@ Requirements:
 * Password
 * Email must be unique
 * Password must contain at least 8 characters
+* Registration confirmation message should appear
+
+User Story 2:
+Title: Student Login
+
+As a registered student,
+I want to log in to the Library Management System,
+So that I can access my account, borrow books, and manage my library activities.
+
+Login Requirements:
+
+* Email Address
+* Password
+* Email and password must be validated
+* Invalid login credentials should show an error message
+* Successful login should redirect the student to the dashboard
+* Student session should be securely maintained after login
 
 Technology Stack:
 
@@ -23,6 +42,88 @@ Technology Stack:
 * Axios
 
 Generate:
+
+1. UI Wireframes for registration and login
+2. React Component Structure
+3. Registration Form UI
+4. Form Validation Rules
+5. Login Form UI
+6. API Integration
+7. Loading States
+8. Error Handling
+9. Success Message and Redirect Flow
+10. Auth Session Handling
+11. Folder Structure
+12. Complete React Component Code
+
+Registration Form Fields:
+
+* Full Name
+* Email Address
+* Student ID
+* Password
+
+Login Form Fields:
+
+* Email Address
+* Password
+
+Frontend Behavior:
+
+* Registration page submits to POST /api/auth/register.
+* Login page submits to POST /api/auth/login.
+* Disable submit buttons while API requests are loading.
+* Show field-level validation errors before submitting.
+* Show API error messages for duplicate registration email, duplicate student ID, and invalid login credentials.
+* On successful registration, display a confirmation message and provide a path to login.
+* On successful login, store the authenticated session according to the backend response strategy and redirect to /dashboard.
+* Use accessible labels, helper text, and keyboard-friendly form controls.
+* Keep the UI responsive for mobile, tablet, and desktop screens.
+
+Follow modern React best practices and responsive design principles.
+
+---
+
+Implementation (see project root):
+- Registration page: src/app/register/page.tsx
+- Registration component: src/components/registration/RegistrationForm.tsx
+- Login page: src/app/login/page.tsx
+- Login component: src/components/login/LoginForm.tsx
+- Dashboard page after login: src/app/dashboard/page.tsx
+- API client: src/lib/api.ts (Axios)
+- Theme: src/components/providers/ThemeRegistry.tsx
+- Login validation helper: src/lib/validations/login.ts
+
+Required API methods in Axios client:
+- registerStudent(payload): POST /api/auth/register
+- loginStudent(payload): POST /api/auth/login
+
+Expected Login Request:
+
+{
+  "email": "student@example.com",
+  "password": "Password123"
+}
+
+Expected Login Success Response:
+
+{
+  "message": "Login successful",
+  "student": {
+    "id": "uuid",
+    "fullName": "Student Name",
+    "email": "student@example.com",
+    "studentId": "STU001"
+  }
+}
+
+Expected Login Error Response:
+
+{
+  "message": "Invalid email or password"
+}
+
+Original registration generation checklist:
 
 1. UI Wireframe
 2. React Component Structure
@@ -34,13 +135,3 @@ Generate:
 8. Success Message Flow
 9. Folder Structure
 10. Complete React Component Code
-
-Follow modern React best practices and responsive design principles.
-
----
-
-Implementation (see project root):
-- Page: src/app/register/page.tsx
-- Component: src/components/registration/RegistrationForm.tsx
-- API client: src/lib/api.ts (Axios)
-- Theme: src/components/providers/ThemeRegistry.tsx

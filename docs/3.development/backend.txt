@@ -1,13 +1,15 @@
 Act as a Senior NextJS Developer.
 
-Based on the following user story, implement the backend for student registration.
+Based on the following user stories, implement the backend for student registration and student login.
 
-User Story:
+User Story 1:
+Title: Student Registration
+
 As a student,
 I want to register for the Library Management System,
 So that I can borrow books and manage my library activities.
 
-Requirements:
+Registration Requirements:
 
 * Full Name
 * Email Address
@@ -15,6 +17,23 @@ Requirements:
 * Password
 * Email must be unique
 * Password must contain at least 8 characters
+* Registration confirmation message should appear
+
+User Story 2:
+Title: Student Login
+
+As a registered student,
+I want to log in to the Library Management System,
+So that I can access my account, borrow books, and manage my library activities.
+
+Login Requirements:
+
+* Email Address
+* Password
+* Email and password must be validated
+* Invalid login credentials should show an error message
+* Successful login should return the authenticated student details
+* Student session should be securely maintained after login
 
 Technology Stack:
 
@@ -26,24 +45,95 @@ Generate:
 
 1. Database Migration
 2. Student Model
-3. Form Request Validation
+3. Registration and Login Request Validation
 4. Controller
 5. Service Layer
 6. API Routes
 7. Registration API Endpoint
-8. Request JSON Example
-9. Response JSON Example
-10. Error Handling
-11. Unit Tests
+8. Login API Endpoint
+9. Request JSON Examples
+10. Response JSON Examples
+11. Error Handling
+12. Unit Tests
 
 Follow NextJS best practices and clean architecture principles.
 
 ---
 
 Implementation (see project root):
-- API Route: src/app/api/auth/register/route.ts
+- Registration API Route: src/app/api/auth/register/route.ts
+- Login API Route: src/app/api/auth/login/route.ts
 - Service: src/services/student.service.ts
-- Validation: src/lib/validations/registration.ts
+- Registration Validation: src/lib/validations/registration.ts
+- Login Validation: src/lib/validations/login.ts
 - Types: src/types/student.ts
-- Tests: src/__tests__/registration.validation.test.ts
-- Endpoint: POST /api/auth/register
+- Registration Tests: src/__tests__/registration.validation.test.ts
+- Login Tests: src/__tests__/login.validation.test.ts
+- Registration Endpoint: POST /api/auth/register
+- Login Endpoint: POST /api/auth/login
+
+Registration API:
+
+POST /api/auth/register
+
+Request:
+
+{
+  "fullName": "Student Name",
+  "email": "student@example.com",
+  "studentId": "STU001",
+  "password": "Password123"
+}
+
+Success Response:
+
+{
+  "message": "Registration successful",
+  "student": {
+    "id": "uuid",
+    "fullName": "Student Name",
+    "email": "student@example.com",
+    "studentId": "STU001"
+  }
+}
+
+Login API:
+
+POST /api/auth/login
+
+Request:
+
+{
+  "email": "student@example.com",
+  "password": "Password123"
+}
+
+Success Response:
+
+{
+  "message": "Login successful",
+  "student": {
+    "id": "uuid",
+    "fullName": "Student Name",
+    "email": "student@example.com",
+    "studentId": "STU001"
+  }
+}
+
+Error Response:
+
+{
+  "message": "Invalid email or password"
+}
+
+Backend Behavior:
+
+* Validate required fields before querying the database.
+* Normalize email addresses before registration and login.
+* Hash student passwords during registration.
+* Never return password_hash in API responses.
+* Compare submitted login password against the stored password hash.
+* Return the same generic error message for missing student and wrong password.
+* Use secure HTTP-only cookies or Supabase session handling for authenticated sessions.
+* Use appropriate HTTP status codes: 201 for registration, 200 for login, 400 for validation errors, 401 for invalid login, 409 for duplicate email or student ID, and 500 for unexpected errors.
+* Add unit tests for login validation, invalid credentials, and successful login service behavior.

@@ -77,3 +77,26 @@ export async function registerStudent(
     throw error;
   }
 }
+
+export async function authenticateStudent(
+  email: string,
+  password: string
+): Promise<StudentPublic> {
+  const normalizedEmail = email.toLowerCase();
+  const student = await findStudentByEmail(normalizedEmail);
+
+  if (!student) {
+    const error = new Error("Invalid email or password");
+    (error as Error & { statusCode?: number }).statusCode = 401;
+    throw error;
+  }
+
+  const isMatch = await bcrypt.compare(password, student.password_hash);
+  if (!isMatch) {
+    const error = new Error("Invalid email or password");
+    (error as Error & { statusCode?: number }).statusCode = 401;
+    throw error;
+  }
+
+  return toStudentPublic(student);
+}

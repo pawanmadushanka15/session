@@ -1,6 +1,6 @@
 Act as a Senior QA Engineer.
 
-Based on the following user story, generate comprehensive test cases.
+Based on the following user story, generate comprehensive manual and automation-ready test cases.
 
 User Story
 
@@ -21,6 +21,20 @@ Acceptance Criteria:
 * Password must contain at least 8 characters.
 * Registration confirmation message should appear.
 
+Technology Stack:
+
+* Frontend: NextJS
+* Backend: NextJS REST API
+* Database: Supabase PostgreSQL
+
+Feature Scope:
+
+* Registration page: /register
+* Registration endpoint: POST /api/auth/register
+* Database table: library_students
+* Required fields: fullName, email, studentId, password
+* Unique fields: email, studentId
+
 Generate:
 
 1. Positive Test Cases
@@ -30,11 +44,59 @@ Generate:
 5. API Test Cases
 6. Security Test Cases
 7. UI Test Cases
-8. Test Data
-9. Expected Results
+8. Database Test Cases
+9. Integration Test Cases
+10. Test Data
+11. Expected Results
 
 Provide the output in the following format:
 
 | Test Case ID | Test Scenario | Preconditions | Test Steps | Test Data | Expected Result | Priority |
 
 Include both manual and automation-ready test cases.
+
+Required Test Coverage:
+
+* Student can register with valid full name, unique email, unique student ID, and valid password.
+* Student cannot register when full name is empty.
+* Student cannot register when email is empty or invalid.
+* Student cannot register when student ID is empty.
+* Student cannot register when password is empty.
+* Student cannot register when password has fewer than 8 characters.
+* Student cannot register with an existing email address.
+* Student cannot register with an existing student ID.
+* Registration API returns 201 for successful registration.
+* Registration API returns 400 for validation errors.
+* Registration API returns 409 for duplicate email or duplicate student ID.
+* Password is stored as a hash and never returned in the API response.
+* Registration confirmation message appears after successful registration.
+* Submit button shows loading state and prevents duplicate submissions.
+* Form is accessible using keyboard navigation.
+* Error messages are clear and displayed near related fields.
+
+Automation Suggestions:
+
+* Unit tests for registration validation rules.
+* API integration tests for POST /api/auth/register.
+* UI component tests for RegistrationForm.
+* End-to-end tests for successful and failed registration flows.
+
+Sample Test Data:
+
+Valid Registration:
+
+{
+  "fullName": "Student Name",
+  "email": "student@example.com",
+  "studentId": "STU001",
+  "password": "Password123"
+}
+
+Invalid Short Password:
+
+{
+  "fullName": "Student Name",
+  "email": "student2@example.com",
+  "studentId": "STU002",
+  "password": "Pass1"
+}

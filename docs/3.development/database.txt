@@ -1,13 +1,15 @@
 Act as a Senior Database Architect.
 
-Based on the following user story, design the database schema.
+Based on the following user stories, design the database schema.
 
-User Story:
+User Story 1:
+Title: Student Registration
+
 As a student,
 I want to register for the Library Management System,
 So that I can borrow books and manage my library activities.
 
-Requirements:
+Registration Requirements:
 
 * Full Name
 * Email Address
@@ -15,6 +17,22 @@ Requirements:
 * Password
 * Email must be unique
 * Password must contain at least 8 characters
+
+User Story 2:
+Title: Student Login
+
+As a registered student,
+I want to log in to the Library Management System,
+So that I can access my account, borrow books, and manage my library activities.
+
+Login Requirements:
+
+* Email Address
+* Password
+* Email and password must be validated
+* Invalid login credentials should show an error message
+* Successful login should redirect the student to the dashboard
+* Student session should be securely maintained after login
 
 Generate:
 
@@ -27,6 +45,8 @@ Generate:
 7. SQL CREATE TABLE Statements
 8. Entity Relationship Diagram (Text Format)
 9. Database Design Justification
+10. Login Query Design
+11. Session Storage Recommendation
 
 Database: Supabase (PostgreSQL direct connection)
 
@@ -40,3 +60,58 @@ Implementation (see project root):
 - DB client: src/lib/db.ts (pg Pool)
 - Table: library_students (id, full_name, email, student_id, password_hash, created_at, updated_at)
 - Unique constraints on email and student_id
+
+Required Student Table:
+
+library_students
+
+Columns:
+
+* id: UUID primary key
+* full_name: VARCHAR or TEXT, required
+* email: VARCHAR or TEXT, required, unique
+* student_id: VARCHAR or TEXT, required, unique
+* password_hash: TEXT, required
+* created_at: TIMESTAMPTZ, required, default current timestamp
+* updated_at: TIMESTAMPTZ, required, default current timestamp
+
+Recommended Login Query:
+
+SELECT id, full_name, email, student_id, password_hash
+FROM library_students
+WHERE email = $1
+LIMIT 1;
+
+Login Database Rules:
+
+* Store only password_hash, never plain text passwords.
+* Use the unique email index for fast login lookup.
+* Normalize email values before insert and lookup.
+* Do not expose password_hash outside the service layer.
+* If custom sessions are stored in the database, create a separate library_student_sessions table instead of adding session data to library_students.
+
+Optional Session Table:
+
+library_student_sessions
+
+Columns:
+
+* id: UUID primary key
+* student_id: UUID foreign key references library_students(id)
+* session_token_hash: TEXT, required, unique
+* expires_at: TIMESTAMPTZ, required
+* created_at: TIMESTAMPTZ, required, default current timestamp
+* revoked_at: TIMESTAMPTZ, nullable
+
+Session Table Indexes:
+
+* Unique index on session_token_hash
+* Index on student_id
+* Index on expires_at
+
+Database Design Justification:
+
+* library_students stores stable student identity and credential hash data.
+* Unique constraints prevent duplicate login identities.
+* A separate session table keeps temporary authentication state independent from student profile data.
+* Indexes support efficient login, session lookup, and session cleanup.

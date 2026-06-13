@@ -29,6 +29,25 @@ export interface RegisterResponse {
   data?: StudentPublic;
 }
 
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    student: StudentPublic;
+  };
+}
+
+export interface AuthMeResponse {
+  success: boolean;
+  authenticated: boolean;
+  student?: StudentPublic;
+}
+
 export interface ApiErrorResponse {
   success: false;
   message: string;

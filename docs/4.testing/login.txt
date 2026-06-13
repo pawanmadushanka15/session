@@ -1,0 +1,134 @@
+Act as a Senior QA Engineer.
+
+Based on the following user story, generate comprehensive manual and automation-ready test cases.
+
+User Story
+
+Title: Student Login
+
+As a registered student,
+
+I want to log in to the Library Management System
+
+So that I can access my account, borrow books, and manage my library activities.
+
+Acceptance Criteria:
+
+* Student can enter email address.
+* Student can enter password.
+* Email and password must be validated.
+* Invalid login credentials should show an error message.
+* Successful login should redirect the student to the dashboard.
+* Student session should be securely maintained after login.
+
+Technology Stack:
+
+* Frontend: NextJS
+* Backend: NextJS REST API
+* Database: Supabase PostgreSQL
+
+Feature Scope:
+
+* Login page: /login
+* Login endpoint: POST /api/auth/login
+* Redirect after successful login: /dashboard
+* Database table: library_students
+* Required fields: email, password
+
+Generate:
+
+1. Positive Test Cases
+2. Negative Test Cases
+3. Boundary Value Test Cases
+4. Validation Test Cases
+5. API Test Cases
+6. Security Test Cases
+7. UI Test Cases
+8. Session Test Cases
+9. Integration Test Cases
+10. Test Data
+11. Expected Results
+
+Provide the output in the following format:
+
+| Test Case ID | Test Scenario | Preconditions | Test Steps | Test Data | Expected Result | Priority |
+
+Include both manual and automation-ready test cases.
+
+Required Test Coverage:
+
+* Registered student can log in with valid email and password.
+* Student cannot log in when email is empty.
+* Student cannot log in when email format is invalid.
+* Student cannot log in when password is empty.
+* Student cannot log in with an unregistered email address.
+* Student cannot log in with an incorrect password.
+* Invalid login attempts show a generic error message.
+* Login API returns 200 for successful login.
+* Login API returns 400 for validation errors.
+* Login API returns 401 for invalid credentials.
+* Login response never returns password_hash.
+* Successful login redirects the student to /dashboard.
+* Authenticated session is created securely after login.
+* Session is stored using secure HTTP-only cookies or the selected Supabase session strategy.
+* Submit button shows loading state and prevents duplicate submissions.
+* Login form is accessible using keyboard navigation.
+* Error messages are clear and displayed near related fields.
+
+Security Test Coverage:
+
+* Password is never logged or exposed in frontend error messages.
+* Invalid email and invalid password return the same generic error message.
+* API does not reveal whether an email address exists.
+* Brute-force protection or rate limiting behavior is verified if implemented.
+* Session cookie uses Secure, HttpOnly, and SameSite attributes if cookie-based sessions are used.
+* Dashboard cannot be accessed without a valid authenticated session.
+
+Automation Suggestions:
+
+* Unit tests for login validation rules.
+* API integration tests for POST /api/auth/login.
+* Service tests for password hash comparison.
+* UI component tests for LoginForm.
+* End-to-end tests for successful login, failed login, and dashboard protection.
+
+Sample Test Data:
+
+Valid Login:
+
+{
+  "email": "student@example.com",
+  "password": "Password123"
+}
+
+Invalid Email Format:
+
+{
+  "email": "student-example.com",
+  "password": "Password123"
+}
+
+Incorrect Password:
+
+{
+  "email": "student@example.com",
+  "password": "WrongPassword123"
+}
+
+Expected Login Success Response:
+
+{
+  "message": "Login successful",
+  "student": {
+    "id": "uuid",
+    "fullName": "Student Name",
+    "email": "student@example.com",
+    "studentId": "STU001"
+  }
+}
+
+Expected Login Error Response:
+
+{
+  "message": "Invalid email or password"
+}
